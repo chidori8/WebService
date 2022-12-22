@@ -71,8 +71,20 @@ def editNote(token: str, id: int, text: str):
     note.text = text
     return NotesTextResponse(id=note.id, text=note.text)
 
-@api_router.get('/{token}/get_note_list', response_model=GetNotesList)
-def get_note_list(token: str):
-    if not Note.getTokenList().__contains__(str(token)):
-        return GetNotesList(noteList=[])
-    return GetNotesList(notelist)
+@api_router.post('/{token}/deleteNote', response_model=CreateNoteResponse)
+def deleteNote(token, id: int):
+    if not Note.getTokenList().__contains__(str(token)) or Note.idIsExist(id):
+        CreateNoteResponse(
+            id=-1
+        )
+    Note.deleteFile(id)
+    return CreateNoteResponse(
+        id=id
+    )
+
+# @api_router.get('/{token}/getNoteList', response_model=GetNotesList)
+# def getNoteList(token: str):
+#     # if not Note.getTokenList().__contains__(str(token)):
+#     #     return GetNotesList(noteList=[])
+#     print(Note.getAllNotes())
+#     return GetNotesList(notelist=Note.getAllNotes())

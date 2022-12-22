@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 from pydantic import BaseModel
 import os
+from typing import Dict
 
 
 # info:
@@ -103,7 +104,7 @@ class Note:
             d = {}
             count = 0
             for item in n:
-                d.update([(count, item)])
+                d.update([(int(count), int(item))])
                 count += 1
             return d
         except FileNotFoundError:
