@@ -82,6 +82,7 @@ def deleteNote(token, id: int):
         id=id
     )
 
+
 # @api_router.get('/{token}/getNoteList', response_model=GetNotesList)
 # def getNoteList(token: str):
 #     # if not Note.getTokenList().__contains__(str(token)):
